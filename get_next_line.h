@@ -22,6 +22,14 @@
 #  define BUFFER_SIZE 42 
 # endif
 
+#if defined(__APPLE__) && defined(__MACH__)
+    #define MAX_OPEN_FILES OPEN_MAX
+#elif defined(__linux__)
+    #define MAX_OPEN_FILES FOPEN_MAX
+#else
+    #error "Unsupported OS"
+#endif
+
 char	*get_next_line(int fd);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *str, int c);
